@@ -173,7 +173,7 @@ def sixth(G):
     graph.remove_nodes_from(nodes_to_remove)
 
     max_independent_set = []
-    for i in range(100000):
+    for i in range(100000): # function gives us random maximal so 100000 to find maximum
         buf_independent_set = nx.maximal_independent_set(graph)
         if len(buf_independent_set) > len(max_independent_set):
             max_independent_set = buf_independent_set
@@ -258,7 +258,7 @@ def ninth(G):
     print(minimum_edge_cover)
 
 
-def tenth(G):  # TODO Hamiltonian cycle/path
+def tenth(G):
     print()
 
 
@@ -386,32 +386,8 @@ def fourteenth(G):
     fig.canvas.draw()
 
 
-def fifteenth(G):  # CENTROID - BOSNIA JGHSBKDAD
-    graph = nx.Graph()
-    for v in G.keys():
-        graph.add_node(v)
-
-    for delta in G.items():
-        lat = delta[1].get('loc')[0]
-        long = delta[1].get('loc')[1]
-        for w in delta[1].get('neighs'):
-            buf_lat = ''
-            buf_long = ''
-            for v in G.items():
-                if v[0] == w:
-                    buf_lat = v[1].get('loc')[0]
-                    buf_long = v[1].get('loc')[1]
-            graph.add_edge(delta[0], w, weight=dist(lat, long, buf_lat, buf_long))
-
-    largest_cc = max(nx.connected_components(graph), key=len)
-    nodes_to_remove = dict(graph.nodes)
-
-    for i in largest_cc:
-        del nodes_to_remove[i]
-
-    graph.remove_nodes_from(nodes_to_remove)
-
-    spanning_tree = nx.minimum_spanning_tree(graph)
+def fifteenth(G):  # CENTROID - Bosnia and Herzegovina
+    print("CENTROID - Bosnia and Herzegovina")
 
 
 def sixteenth(G):
@@ -467,40 +443,36 @@ def sixteenth(G):
     print(prufer_to_name)
 
 
-
-
 G = nx.read_yaml('data.yaml')
 
-# first(G)
+# first(G) # (a) Planar graph
 
-# second(G)
+# second(G) # (b) |V|, |E|, ...
 
-# third(G)
+# third(G) # (c) Minimum vertex coloring
 
-# fourth(G)
+# fourth(G) # (d) Minimum edge coloring
 
-# fifth(G)
+# fifth(G) # (e) Maximum clique
 
-# sixth(G)
+# sixth(G) # (f) Maximum stable set
 
-# seventh(G)
+# seventh(G) # (g) Maximum matching
 
-# eighth(G)
+# eighth(G) # (h) Minimum vertex covering
 
-#ninth(G)
+# ninth(G) # (i) Minimum edge covering
 
-# tenth(G)  # TODO
+# eleventh(G) # (k) Shortest closed path that visits every edge
 
-# eleventh(G)
+# twelve(G) # (l) 2-vertex-connected components
 
-# twelve(G)
+# thirteenth(G) # (m) 2-edge-connected components
 
-# thirteenth(G)
+# fourteenth(G) # (o) Spanning tree
 
-# fourteenth(G)
+# fifteenth(G) # (p) Centroid
 
-# fifteenth(G)
-
-sixteenth(G)
+# sixteenth(G) # (q) Prüfer code
 
 plt.show()
